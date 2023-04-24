@@ -1,0 +1,54 @@
+drop database if exists superheroesData;
+create database superheroesData;
+
+use superheroesData;
+
+create table superhero(
+superheroName varchar(20) not null,
+realName varchar(20),
+creationYear int,
+primary key(superheroName),
+unique index(realName)
+);
+
+create table superpower(
+powerId int auto_increment,
+power varchar(20) not null,
+primary key(powerId)
+
+);
+
+create table powerRelation(
+superheroName varchar(20),
+powerId int,
+foreign key (superheroname) references superhero(superheroName),
+foreign key (powerId) references superpower(powerId),
+primary key (powerId,superheroName)
+);
+
+create table city(
+cityId int auto_increment,
+cityName varchar(20)not null,
+superhero varchar(20),
+foreign key(superhero) references superhero(superheroName),
+primary key(cityId)
+);
+
+insert into superheroesdata.superhero values ('superman','clark kent',1955);
+insert into superheroesdata.superhero values ('batman','bruce banner',1965);
+insert into superheroesdata.superhero values ('spiderman','peter parker',1975);
+
+insert into superheroesdata.superpower (power) values ('laserEyes');
+insert into superheroesdata.superpower (power)values (null);
+insert into superheroesdata.superpower (power) value ('superstreangth');
+insert into superheroesdata.superpower (power) value ('spiderweb');
+
+insert into superheroesdata.powerrelation value('superman',(select powerId from superheroesdata.superpower where power = 'laserEyes'));
+insert into superheroesdata.powerrelation value('superman',(select powerId from superheroesdata.superpower where power = 'superstreangth'));
+insert into superheroesdata.powerrelation value('batman',(select powerId from superheroesdata.superpower where power is null));
+insert into superheroesdata.powerrelation value('spiderman',(select powerId from superheroesdata.superpower where power = 'spiderweb'));
+insert into superheroesdata.powerrelation value('spiderman',(select powerId from superheroesdata.superpower where power = 'superstreangth'));
+
+insert into superheroesdata.city (cityName,superhero) value('Los Angiles','spiderman');
+insert into superheroesdata.city (cityName,superhero) value('Gothham City','spiderman');
+insert into superheroesdata.city (cityName,superhero) value('New York','spiderman');
