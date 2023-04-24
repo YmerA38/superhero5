@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${dto.hero.heroName}"/><h1> has ben added to list</h1>
+    <a th:href="@{http://localhost:8080/superheroes}">
+        <button>Return to List</button>
+    </a>
+
+
+
+</body>
+</html>

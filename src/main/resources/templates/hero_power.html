@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+  <link th:href="@{/style.css}" rel="stylesheet" >
+    <meta charset="UTF-8">
+    <title th:text ="${hero}"></title>
+</head>
+<body>
+<h1 th:text ="${hero}"></h1>
+<table>
+  <tr>
+    <th>Power</th>
+  </tr>
+  <div th:each="r : ${relations}"th:if="${r.heroName}==${heroName}">
+    <div th:each="p : ${powers}"th:if="${p.powerId}==${r.powerId}" >
+      <tr >
+        <td th:text="${p.name}"/>
+      </tr>
+    </div>
+  </div>
+</table>
+<a th:href="@{http://localhost:8080/superheroes}">
+  <button>Back</button>
+</a>
+</body>
+</html>
